@@ -1,8 +1,9 @@
 ---
-apiVersion: pkg.crossplane.io/v1alpha1
+apiVersion: pkg.crossplane.io/v1
 kind: ControllerConfig
 metadata:
   name: terraform-provider
+  namespace: upbound-system
   labels:
     app: crossplane-provider-terraform
 spec:
@@ -16,6 +17,7 @@ apiVersion: pkg.crossplane.io/v1
 kind: Provider
 metadata:
   name: terraform-provider
+  namespace: upbound-system
   labels:
     app: crossplane-provider-terraform
 spec:

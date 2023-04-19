@@ -8,19 +8,19 @@ set -euo pipefail
 helm repo add crossplane-stable https://charts.crossplane.io/stable
 helm repo update
 
-helm install crossplane \
-  --namespace crossplane-system \
+helm template crossplane \
+  --namespace upbound-system \
   --create-namespace \
   crossplane-stable/crossplane \
-  --version 1.11.3
-
+  --version 1.11.3 > ./crossplane-system/templates/crossplane.yaml
+  
 ### setup ProviderConfig 
 
 ### Setup private git credentials
 # cat .git-credentials
 # https://<user>:<token>@github.com
 
-# kubectl -n crossplane-system create secret generic git-credentials --from-file=.git-credentials
+# kubectl -n upbound-system create secret generic git-credentials --from-file=.git-credentials
 
 ### setup aws-creds ?
 # Do we need to do this?

@@ -1,8 +1,8 @@
 apiVersion: tf.upbound.io/v1beta1
 kind: Workspace
 metadata:
-  name: crossplane-terraform-dynamodb-game-v1
-  annotations:
+  name: crossplane-terraform-dynamodb
+  namespace: upbound-system
 spec:
   forProvider:
     initArgs:
@@ -12,7 +12,7 @@ spec:
     source: Remote
     module: git::https://github.com/terraform-aws-modules/terraform-aws-dynamodb-table
   writeConnectionSecretToRef:
-    namespace: crossplane-system
-    name: crossplane-terraform-dynamodb-game-v1
+    namespace: upbound-system
+    name: crossplane-terraform-dynamodb
   providerConfigRef:
     name: terraform-provider-conf
