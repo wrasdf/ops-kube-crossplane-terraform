@@ -1,0 +1,18 @@
+apiVersion: tf.upbound.io/v1beta1
+kind: Workspace
+metadata:
+  name: crossplane-terraform-dynamodb-game-v1
+  annotations:
+spec:
+  forProvider:
+    initArgs:
+      - -upgrade=true
+    applyArgs:
+      - -auto-approve
+    source: Remote
+    module: git::https://github.com/terraform-aws-modules/terraform-aws-dynamodb-table
+  writeConnectionSecretToRef:
+    namespace: crossplane-system
+    name: crossplane-terraform-dynamodb-game-v1
+  providerConfigRef:
+    name: terraform-provider-conf

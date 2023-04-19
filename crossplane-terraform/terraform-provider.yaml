@@ -1,0 +1,24 @@
+---
+apiVersion: pkg.crossplane.io/v1alpha1
+kind: ControllerConfig
+metadata:
+  name: terraform-provider
+  labels:
+    app: crossplane-provider-terraform
+spec:
+  args:
+    - -d
+    - --poll=5m
+    - --max-reconcile-rate=10
+
+---
+apiVersion: pkg.crossplane.io/v1
+kind: Provider
+metadata:
+  name: terraform-provider
+  labels:
+    app: crossplane-provider-terraform
+spec:
+  package: xpkg.upbound.io/upbound/provider-terraform:v0.6.0
+  controllerConfigRef:
+    name: terraform-provider

@@ -1,0 +1,35 @@
+---
+apiVersion: tf.upbound.io/v1beta1
+kind: Workspace
+metadata:
+  name: crossplane-terraform-s3-v1
+  annotations:
+spec:
+  forProvider:
+    source: Inline
+    module: |
+      resource "aws_s3_bucket" "paas-cp" {
+       bucket = "paas-cp-s3-inline-argo"
+       tags = {
+       Name        = "arun"
+       Environment = "Dev"
+       }
+      }
+      resource "aws_s3_bucket_acl" "acl-test" {
+       bucket = aws_s3_bucket.paas-cp.id
+       acl    = "private"
+      }
+      terraform {
+       backend "s3" {
+        bucket = "paas-us-west-2-development-tfstate-bucket"
+        key    = "s3-test"
+        region = "us-west-2"
+        shared_credentials_file = "aws-creds.ini"
+        workspace_key_prefix = "crossplane-test"
+       }
+      }
+  writeConnectionSecretToRef:
+    namespace: crossplane-system
+    name: crossplane-terraform-s3-v1
+  providerConfigRef:
+    name: terraform-provider-conf
