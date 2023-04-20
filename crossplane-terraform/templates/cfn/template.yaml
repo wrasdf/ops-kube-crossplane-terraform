@@ -1,0 +1,30 @@
+---
+AWSTemplateFormatVersion: 2010-09-09
+Description: eks cluster crossplane terraform-provider access permission
+Resources:
+
+  Role:
+    Type: AWS::IAM::Role
+    Properties:
+      PermissionsBoundary: !Sub arn:aws:iam::${AWS::AccountId}:policy/ap-service-boundary
+      RoleName: kube-crossplane-terraform-provider-<< .config.clusterName >>
+      Path: /k8s/<< .config.clusterName >>/
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Federated: !Sub arn:aws:iam::${AWS::AccountId}:oidc-provider/oidc.eks.${AWS::Region}.amazonaws.com/id/<< .config.clusterId >>
+            Action: sts:AssumeRoleWithWebIdentity
+
+      Policies:
+        - PolicyName: ops-kube-crossplane-terraform-provider
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+            - Effect: "Allow"
+              Action:
+                - "s3:*"
+                - "dynamodb:*"
+              Resource:
+                - "*"

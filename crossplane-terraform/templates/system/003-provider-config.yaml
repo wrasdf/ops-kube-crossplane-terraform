@@ -1,0 +1,42 @@
+---
+apiVersion: tf.upbound.io/v1beta1
+kind: ProviderConfig
+metadata:
+  name: crossplane-provider-terraform-conf-v1
+  namespace: upbound-system
+spec:
+  pluginCache: false
+  configuration: |
+    terraform {
+      backend "kubernetes" {
+        secret_suffix     = "crossplane-terraform-provider-config-<< .config.clusterName >>"
+        namespace         = "upbound-system"
+        in_cluster_config = true
+      }
+    }
+    
+    provider "aws" {
+      region = "<< .config.aws.region >>"
+    }
+  credentials:
+    - filename: aws.json
+      source: None
+
+---
+apiVersion: pkg.crossplane.io/v1alpha1
+kind: ControllerConfig
+metadata:
+  name: crossplane-provider-terraform
+  namespace: upbound-system
+  annotations:
+    eks.amazonaws.com/role-arn: arn:aws:iam::<< .config.aws.accountId >>:role/k8s/<< .config.clusterName >>/kube-crossplane-terraform-provider-<< .config.clusterName >>
+  labels:
+    app: crossplane-provider-terraform
+spec:
+  args:
+    - -d
+    - --poll=5m
+    - --max-reconcile-rate=10
+  podSecurityContext:
+    fsGroup: 2000  
+

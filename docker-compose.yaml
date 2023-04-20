@@ -23,14 +23,6 @@ services:
     entrypoint: 
       - bash
 
-  app:
-    <<: *base
-    build:
-      context: .
-      target: base
-    entrypoint: 
-      - bash
-
   terraform:
     <<: *base
     image: ikerry/tf-toolkit:v0.2.0

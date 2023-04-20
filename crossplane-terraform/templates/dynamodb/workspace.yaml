@@ -13,6 +13,6 @@ spec:
     module: git::https://github.com/terraform-aws-modules/terraform-aws-dynamodb-table
   writeConnectionSecretToRef:
     namespace: upbound-system
-    name: crossplane-terraform-dynamodb
+    name: crossplane-provider-terraform-dynamodb
   providerConfigRef:
-    name: terraform-provider-conf
+    name: crossplane-provider-terraform-conf-v1

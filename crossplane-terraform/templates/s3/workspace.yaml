@@ -6,26 +6,21 @@ metadata:
 spec:
   forProvider:
     source: Inline
+    initArgs:
+      - -upgrade=true
+    applyArgs:
+      - -auto-approve
     module: |
       resource "aws_s3_bucket" "terraform-s3" {
         bucket = "crossplane-terraform-s3-<< .config.clusterName >>"
       }
 
-      resource "aws_s3_bucket_acl" "acl-test" {
+      resource "aws_s3_bucket_acl" "terraform-s3" {
         bucket = aws_s3_bucket.terraform-s3.id
         acl    = "private"
-      }
-
-      terraform {
-        backend "s3" {
-          bucket = "ops-kube-crossplane-terraform-<< .config.aws.accountId >>-<< .config.clusterName >>"
-          key    = "terraform-s3"
-          region = "<< .config.aws.region >>"
-          shared_credentials_file = "aws-creds.ini"
-        }
       }
   writeConnectionSecretToRef:
     namespace: upbound-system
     name: crossplane-terraform-s3
   providerConfigRef:
-    name: terraform-provider-conf
+    name: crossplane-provider-terraform-conf-v1

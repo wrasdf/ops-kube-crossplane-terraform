@@ -9,15 +9,5 @@ crossplane with terraform
 ### TODO List
 - How to setup terraform remote s3 backend 
 - How to create dynamodb
+- How to create s3
 - How to debug logs
-
-
-### Questions
-- tf folder ?
-
-- Does `terraform-provider` have dependency with `aws-provider`?
-
-- How to setup `aws-creds` in `providerConfig`
-  - How to setup it with IAM pattern?
-
-- 
