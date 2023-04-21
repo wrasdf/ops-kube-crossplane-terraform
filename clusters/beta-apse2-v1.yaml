@@ -3,7 +3,7 @@ aws:
   accountId: 723236915308
   region: ap-southeast-2
 clusterName: beta-apse2-v1
-cluserId: 7B6E1EB035F5527F788217E3F82681CB
+clusterId: 7B6E1EB035F5527F788217E3F82681CB
 name: gamer-beta-apse2-v1
 namespace: pe
 dns: gamer.pe.au.platform.afterpay-beta.com

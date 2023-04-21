@@ -11,14 +11,33 @@ spec:
     applyArgs:
       - -auto-approve
     module: |
-      resource "aws_s3_bucket" "terraform-s3" {
-        bucket = "crossplane-terraform-s3-<< .config.clusterName >>"
+      resource "aws_s3_bucket" "crossplane_terraform_s3" {
+        bucket = var.bucket_name
+        tags = {
+          Name        = var.bucket_name
+          CreatedBy   = "crossplane terraform-provider"
+        }
       }
 
-      resource "aws_s3_bucket_acl" "terraform-s3" {
-        bucket = aws_s3_bucket.terraform-s3.id
+      resource "aws_s3_bucket_acl" "crossplane_terraform_s3" {
+        bucket = aws_s3_bucket.crossplane_terraform_s3.id
         acl    = "private"
       }
+
+      variable "bucket_name" {
+        description = "bucket name"
+        type        = string
+      }
+
+      output "bucket_arn" {
+        value       = aws_s3_bucket.bucket_arn
+        description = "Bucket ARN"
+      }
+
+    vars:
+      - key: bucket_name
+        value: "crossplane-terraform-s3-<< .config.clusterName >>"
+  
   writeConnectionSecretToRef:
     namespace: upbound-system
     name: crossplane-terraform-s3
