@@ -3,14 +3,21 @@ apiVersion: apiextensions.crossplane.io/v1
 kind: Composition
 metadata:
   name: tf-xs3.aws.crossplane.afterpay.cloud
+  namespace: upbound-system
   labels:
     provider: terraform
 spec:
+  writeConnectionSecretsToNamespace: upbound-system
   compositeTypeRef:
     apiVersion: aws.crossplane.afterpay.cloud/v1beta1
     kind: XS3
+  patchSets:
+    - name: common
+      patches:
+        - fromFieldPath: spec.resourceConfig.providerConfigRef
+          toFieldPath: spec.providerConfigRef.name
   resources:
-    - name: tf-s3
+    - name: terraform-s3
       base:
         apiVersion: tf.upbound.io/v1beta1
         kind: Workspace
@@ -44,15 +51,12 @@ spec:
               - key: bucket_name
 
       patches:
-        - fromFieldPath: spec.vpcName
+        - type: PatchSet
+          patchSetName: common
+        - fromFieldPath: spec.bucket_name
           toFieldPath: spec.forProvider.vars[0].value
         - type: ToCompositeFieldPath
-          fromFieldPath: status.atProvider.outputs.vpc_id
-          toFieldPath: status.share.vpcId
-          policy:
-            fromFieldPath: Optional
-        - type: ToCompositeFieldPath
-          fromFieldPath: status.atProvider.outputs.subnet_id
-          toFieldPath: status.share.subnetId
+          fromFieldPath: status.atProvider.outputs.bucket_id
+          toFieldPath: status.outputs.bucket_id
           policy:
             fromFieldPath: Optional

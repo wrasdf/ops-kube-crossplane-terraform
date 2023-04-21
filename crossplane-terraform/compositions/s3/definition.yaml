@@ -1,0 +1,37 @@
+---
+apiVersion: apiextensions.crossplane.io/v1
+kind: CompositeResourceDefinition
+metadata:
+  name: xs3.aws.crossplane.afterpay.cloud
+spec:
+  group: aws.crossplane.afterpay.cloud
+  names:
+    kind: XS3
+    plural: xs3
+  claimNames:
+    kind: S3
+    plural: s3
+  versions:
+  - name: v1beta1
+    served: true
+    referenceable: true
+    schema:
+      openAPIV3Schema:
+        type: object
+        properties:
+          spec:
+            type: object
+            properties:
+              bucket_name:
+                type: string
+              resourceConfig:
+                type: object
+                properties:
+                  providerConfigRef:
+                    type: string
+            required:
+              - bucket_name
+          status:
+            description: Status defines the observed state of Terraform
+            type: object
+            x-kubernetes-preserve-unknown-fields: true

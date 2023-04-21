@@ -3,6 +3,7 @@ apiVersion: tf.upbound.io/v1beta1
 kind: Workspace
 metadata:
   name: crossplane-terraform-s3
+  namespace: upbound-system
 spec:
   forProvider:
     source: Inline

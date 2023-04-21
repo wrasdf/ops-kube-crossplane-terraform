@@ -1,9 +1,13 @@
+---
 apiVersion: aws.crossplane.afterpay.cloud/v1beta1
 kind: S3
 metadata:
   name: crossplane-composition-s3-<< .config.clusterName >>
+  namespace: upbound-system
 spec:
   bucket_name: crossplane-composition-s3-<< .config.clusterName >>
+  resourceConfig:
+    providerConfigRef: crossplane-provider-terraform-conf-v1
   compositionSelector:
     matchLabels:
       provider: terraform
