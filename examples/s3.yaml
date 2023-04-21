@@ -2,10 +2,9 @@
 apiVersion: aws.crossplane.afterpay.cloud/v1beta1
 kind: S3
 metadata:
-  name: crossplane-composition-s3-<< .config.clusterName >>
-  namespace: upbound-system
+  name: crossplane-composition-s3-alpha-apse2-v1
 spec:
-  bucket_name: crossplane-composition-s3-<< .config.clusterName >>
+  bucket_name: crossplane-composition-s3-alpha-apse2-v1
   resourceConfig:
     providerConfigRef: crossplane-provider-terraform-conf-v1
   compositionSelector:
