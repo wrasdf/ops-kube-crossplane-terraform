@@ -1,0 +1,58 @@
+---
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  name: tf-xs3.aws.crossplane.afterpay.cloud
+  labels:
+    provider: terraform
+spec:
+  compositeTypeRef:
+    apiVersion: aws.crossplane.afterpay.cloud/v1beta1
+    kind: XS3
+  resources:
+    - name: tf-s3
+      base:
+        apiVersion: tf.upbound.io/v1beta1
+        kind: Workspace
+        spec:
+          forProvider:
+            source: Inline
+            module: |
+              resource "aws_s3_bucket" "crossplane_terraform_s3" {
+                bucket = var.bucket_name
+                tags = {
+                  Name        = var.bucket_name
+                  CreatedBy   = "crossplane terraform-provider"
+                }
+              }
+
+              resource "aws_s3_bucket_acl" "crossplane_terraform_s3" {
+                bucket = aws_s3_bucket.crossplane_terraform_s3.id
+                acl    = "private"
+              }
+
+              variable "bucket_name" {
+                description = "bucket name"
+                type        = string
+              }
+
+              output "bucket_id" {
+                value       = aws_s3_bucket.crossplane_terraform_s3.id
+                description = "Bucket ARN"
+              }
+            vars:
+              - key: bucket_name
+
+      patches:
+        - fromFieldPath: spec.vpcName
+          toFieldPath: spec.forProvider.vars[0].value
+        - type: ToCompositeFieldPath
+          fromFieldPath: status.atProvider.outputs.vpc_id
+          toFieldPath: status.share.vpcId
+          policy:
+            fromFieldPath: Optional
+        - type: ToCompositeFieldPath
+          fromFieldPath: status.atProvider.outputs.subnet_id
+          toFieldPath: status.share.subnetId
+          policy:
+            fromFieldPath: Optional

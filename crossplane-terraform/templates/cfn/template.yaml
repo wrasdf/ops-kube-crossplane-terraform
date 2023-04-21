@@ -26,5 +26,7 @@ Resources:
               Action:
                 - "s3:*"
                 - "dynamodb:*"
+                - "ec2:*"
+                - "rds:*"
               Resource:
                 - "*"
