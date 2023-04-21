@@ -2,9 +2,16 @@
 
 set -euo pipefail
 
+if [ "$#" -lt 1 ]; then
+  echo
+  echo "usage: ./bin/setup.sh <cluster>"
+  echo "  ie. ./bin/setup.sh alpha-apse2-v1"
+  exit 255
+fi
+
+cluster=${1}
 
 ### install crossplane
-
 helm repo add crossplane-stable https://charts.crossplane.io/stable
 helm repo update
 
@@ -14,24 +21,7 @@ helm template crossplane \
   crossplane-stable/crossplane \
   --version 1.11.3 > ./crossplane-terraform/templates/system/crossplane.yaml
 
-# ### Upbound Universal Crossplane (UXP)
+./bin/compile.sh $cluster
 
-# helm repo add upbound-stable https://charts.upbound.io/stable && helm repo update
-# helm template uxp \
-#   --namespace upbound-system \
-#   upbound-stable/universal-crossplane \
-#   --devel > ./crossplane-terraform/templates/system/upbound.yaml
-
-### setup ProviderConfig 
-
-### Setup private git credentials
-# cat .git-credentials
-# https://<user>:<token>@github.com
-
-# kubectl -n upbound-system create secret generic git-credentials --from-file=.git-credentials
-
-### setup aws-creds ?
-# Do we need to do this?
-
-stackup "ops-kube-crossplane-terraform-privider-alpha-apse2-v1" up -t "_build/alpha-apse2-v1/cfn/template.yaml"
+stackup "ops-kube-crossplane-terraform-privider-$cluster" up -t "_build/$cluster/cfn/template.yaml"
 
