@@ -11,3 +11,22 @@ spec:
   controllerConfigRef:
     name: crossplane-provider-terraform
 
+
+---
+apiVersion: pkg.crossplane.io/v1alpha1
+kind: ControllerConfig
+metadata:
+  name: crossplane-provider-terraform
+  namespace: upbound-system
+  annotations:
+    eks.amazonaws.com/role-arn: arn:aws:iam::<< .config.aws.accountId >>:role/k8s/<< .config.clusterName >>/kube-crossplane-terraform-provider-<< .config.clusterName >>
+  labels:
+    app: crossplane-provider-terraform
+spec:
+  args:
+    - -d
+    - --poll=5m
+    - --max-reconcile-rate=10
+  podSecurityContext:
+    fsGroup: 2000  
+

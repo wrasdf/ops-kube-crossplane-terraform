@@ -29,8 +29,8 @@ spec:
         type        = string
       }
 
-      output "bucket_arn" {
-        value       = aws_s3_bucket.bucket_arn
+      output "bucket_id" {
+        value       = aws_s3_bucket.crossplane_terraform_s3.id
         description = "Bucket ARN"
       }
 
