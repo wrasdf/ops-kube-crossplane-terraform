@@ -1,13 +1,17 @@
 # ops-kube-crossplane-terraform
 crossplane with terraform
 
-### Details
-- namespace: upbound-system
-- apiVersion: tf.upbound.io/v1beta1
-- apiVersion: pkg.crossplane.io/v1
-
 ### TODO List
-- How to setup terraform remote s3 backend 
+- How to setup terraform remote s3 backend -> WIP
 - How to create dynamodb
+  - workspace -> ok
+  - composition - WIP
 - How to create s3
-- How to debug logs
+  - workspace -> ok
+  - composition -> ok
+- How to debug the issues
+  - k get workspace
+  - k get Composition
+  - k get s3
+  - k get dynamodb
+  - k describe ...
