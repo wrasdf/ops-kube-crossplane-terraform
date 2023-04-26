@@ -2,7 +2,7 @@ apiVersion: tf.upbound.io/v1beta1
 kind: Workspace
 metadata:
   name: crossplane-terraform-dynamodb
-  namespace: upbound-system
+  namespace: << .config.namespace >>
 spec:
   forProvider:
     initArgs:
@@ -10,7 +10,37 @@ spec:
     applyArgs:
       - -auto-approve
     source: Remote
-    module: git::https://github.com/terraform-aws-modules/terraform-aws-dynamodb-table
+    module: git::https://github.com/wrasdf/terraform-dynamodb.git?ref=main
+    vars:
+      - key: name
+        value: "<< .config.dynamodb.name >>"
+      - key: hash_key
+        value: "<< .config.dynamodb.hash_key >>"
+      - key: range_key
+        value: "<< .config.dynamodb.range_key >>"
+    varmap:
+      global_secondary_indexes:
+          <<- range $gsi := .config.dynamodb.global_secondary_indexes >>
+          - "name": "<< $gsi.name >>"
+            "hash_key": "<< $gsi.hash_key >>"
+            "range_key": "<< $gsi.range_key >>"
+            "write_capacity": << $gsi.write_capacity >>
+            "read_capacity": << $gsi.read_capacity >>
+            "projection_type": "<< $gsi.projection_type >>"
+            "non_key_attributes":
+              <<- range $nka := $gsi.non_key_attributes >>
+              - "<< $nka >>"
+              <<- end >>
+          <<- end >>
+      replica_regions:
+          <<- range $region := .config.dynamodb.replica_regions >>
+          - "<< $region >>"
+          <<- end >>
+      attributes:
+          <<- range $attribute := .config.dynamodb.attributes >>
+          - "name": "<< $attribute.name >>"
+            "type": "<< $attribute.type >>"
+          <<- end >>
   writeConnectionSecretToRef:
     namespace: upbound-system
     name: crossplane-provider-terraform-dynamodb

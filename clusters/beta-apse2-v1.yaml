@@ -4,14 +4,9 @@ aws:
   region: ap-southeast-2
 clusterName: beta-apse2-v1
 clusterId: 7B6E1EB035F5527F788217E3F82681CB
-name: gamer-beta-apse2-v1
 namespace: pe
-dns: gamer.pe.au.platform.afterpay-beta.com
-repo: ops-kube-dynamodb
-targetPort: 3000
-serviceRole: arn:aws:iam::723236915308:role/k8s/pe/gamer
 dynamodb:
-  name: dynamodb-game-beta-apse2-v1
+  name: crossplane-terraform-dynamodb-beta-apse2-v1
   hash_key: UserId
   range_key: GameTitle
   global_secondary_indexes: 
