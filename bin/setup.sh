@@ -17,9 +17,8 @@ helm repo update
 
 helm template crossplane \
   --namespace upbound-system \
-  --create-namespace \
   crossplane-stable/crossplane \
-  --version 1.11.3 > ./crossplane-terraform/templates/system/crossplane.yaml
+  --version 1.11.3 > ./crossplane-terraform/templates/system/001-crossplane.yaml
 
 ./bin/compile.sh $cluster
 
