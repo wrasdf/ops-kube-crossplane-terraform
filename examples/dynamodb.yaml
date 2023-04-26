@@ -2,9 +2,9 @@
 apiVersion: aws.crossplane.afterpay.cloud/v1beta1
 kind: Dynamodb
 metadata:
-  name: crossplane-composition-dynamodb1-alpha-apse2-v1
+  name: crossplane-composition-dynamodb3-alpha-apse2-v1
 spec:
-  name: crossplane-composition-dynamodb1-alpha-apse2-v1
+  name: crossplane-composition-dynamodb3-alpha-apse2-v1
   hash_key: UserId
   range_key: GameTitle
   global_secondary_indexes:
@@ -21,11 +21,11 @@ spec:
     - eu-west-1
   attributes:
     - name: UserId
-      type: S
+      type: "S"
     - name: GameTitle
-      type: S
+      type: "S"
     - name: TopScore
-      type: N  
+      type: "N"
   resourceConfig:
     providerConfigRef: crossplane-provider-terraform-conf-v1
   compositionSelector:

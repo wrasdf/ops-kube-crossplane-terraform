@@ -2,7 +2,7 @@
 apiVersion: apiextensions.crossplane.io/v1
 kind: Composition
 metadata:
-  name: tf-xynamodb.aws.crossplane.afterpay.cloud
+  name: tf-xdynamodb.aws.crossplane.afterpay.cloud
   namespace: upbound-system
   labels:
     provider: terraform
@@ -48,8 +48,6 @@ spec:
         - fromFieldPath: spec.range_key
           toFieldPath: spec.forProvider.vars[2].value
         - fromFieldPath: spec.local_secondary_indexes
-          toFieldPath: spec.forProvider.varmap.local_secondary_indexes
-        - fromFieldPath: spec.global_secondary_indexes
           toFieldPath: spec.forProvider.varmap.local_secondary_indexes
         - fromFieldPath: spec.global_secondary_indexes
           toFieldPath: spec.forProvider.varmap.global_secondary_indexes
