@@ -20,45 +20,45 @@ function cleanTemplate() {
 
 function castTemplate() {
 
-  echo "=== casting $cluster crossplane system config templates ==="
-  gomplate \
-    --left-delim='<<' --right-delim='>>' \
-    --input-dir ./crossplane-terraform/templates/system \
-    --output-dir=_build/${cluster}/system \
-    --context config=${configfile}
-
   echo "=== casting $cluster crossplane IAM CFN templates ==="
   gomplate \
     --left-delim='<<' --right-delim='>>' \
-    --input-dir ./crossplane-terraform/templates/cfn \
-    --output-dir=_build/${cluster}/cfn \
+    --input-dir ./crossplane-terraform/templates/001-cfn \
+    --output-dir=_build/${cluster}/001-cfn \
+    --context config=${configfile}
+    
+  echo "=== casting $cluster crossplane system config templates ==="
+  gomplate \
+    --left-delim='<<' --right-delim='>>' \
+    --input-dir ./crossplane-terraform/templates/002-system \
+    --output-dir=_build/${cluster}/002-system \
     --context config=${configfile}
 
   echo "=== casting $cluster workspace dynamodb templates ==="
   gomplate \
     --left-delim='<<' --right-delim='>>' \
-    --input-dir ./crossplane-terraform/templates/dynamodb \
+    --input-dir ./crossplane-terraform/templates/workspaces/dynamodb \
     --output-dir=_build/${cluster}/workspaces/dynamodb \
     --context config=${configfile}
 
   echo "=== casting $cluster workspace s3 templates ==="
   gomplate \
     --left-delim='<<' --right-delim='>>' \
-    --input-dir ./crossplane-terraform/templates/s3 \
+    --input-dir ./crossplane-terraform/templates/workspaces/s3 \
     --output-dir=_build/${cluster}/workspaces/s3 \
     --context config=${configfile}  
 
   echo "=== casting $cluster compositions s3 templates ==="
   gomplate \
     --left-delim='<<' --right-delim='>>' \
-    --input-dir ./crossplane-terraform/compositions/s3 \
+    --input-dir ./crossplane-terraform/templates/compositions/s3 \
     --output-dir=_build/${cluster}/compositions/s3 \
     --context config=${configfile}    
 
   echo "=== casting $cluster compositions dynamodb templates ==="
   gomplate \
     --left-delim='<<' --right-delim='>>' \
-    --input-dir ./crossplane-terraform/compositions/dynamodb \
+    --input-dir ./crossplane-terraform/templates/compositions/dynamodb \
     --output-dir=_build/${cluster}/compositions/dynamodb \
     --context config=${configfile}    
 
