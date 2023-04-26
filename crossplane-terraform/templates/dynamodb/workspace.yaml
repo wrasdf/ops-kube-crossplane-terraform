@@ -1,7 +1,7 @@
 apiVersion: tf.upbound.io/v1beta1
 kind: Workspace
 metadata:
-  name: crossplane-terraform-dynamodb
+  name: crossplane-terraform-dynamodb-v1
   namespace: << .config.namespace >>
 spec:
   forProvider:

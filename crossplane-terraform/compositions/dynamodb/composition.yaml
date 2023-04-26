@@ -1,0 +1,59 @@
+---
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  name: tf-xynamodb.aws.crossplane.afterpay.cloud
+  namespace: upbound-system
+  labels:
+    provider: terraform
+spec:
+  writeConnectionSecretsToNamespace: upbound-system
+  compositeTypeRef:
+    apiVersion: aws.crossplane.afterpay.cloud/v1beta1
+    kind: XDynamodb
+  patchSets:
+    - name: common
+      patches:
+        - fromFieldPath: spec.resourceConfig.providerConfigRef
+          toFieldPath: spec.providerConfigRef.name
+  resources:
+    - name: terraform-dynamodb
+      base:
+        apiVersion: tf.upbound.io/v1beta1
+        kind: Workspace
+        spec:
+          forProvider:
+            initArgs:
+              - -upgrade=true
+            applyArgs:
+              - -auto-approve
+            source: Remote
+            module: git::https://github.com/wrasdf/terraform-dynamodb.git?ref=main
+            vars:
+              - key: name
+              - key: hash_key
+              - key: range_key
+            varmap:
+              local_secondary_indexes: []
+              global_secondary_indexes: []
+              replica_regions: []
+              attributes: []
+      patches:
+        - type: PatchSet
+          patchSetName: common
+        - fromFieldPath: spec.name
+          toFieldPath: spec.forProvider.vars[0].value
+        - fromFieldPath: spec.hash_key
+          toFieldPath: spec.forProvider.vars[1].value
+        - fromFieldPath: spec.range_key
+          toFieldPath: spec.forProvider.vars[2].value
+        - fromFieldPath: spec.local_secondary_indexes
+          toFieldPath: spec.forProvider.varmap.local_secondary_indexes
+        - fromFieldPath: spec.global_secondary_indexes
+          toFieldPath: spec.forProvider.varmap.local_secondary_indexes
+        - fromFieldPath: spec.global_secondary_indexes
+          toFieldPath: spec.forProvider.varmap.global_secondary_indexes
+        - fromFieldPath: spec.replica_regions
+          toFieldPath: spec.forProvider.varmap.replica_regions
+        - fromFieldPath: spec.attributes
+          toFieldPath: spec.forProvider.varmap.attributes

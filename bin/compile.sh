@@ -13,7 +13,7 @@ cluster=${1}
 configfile=clusters/${cluster}.yaml
 
 function cleanTemplate() {
-  echo "=== preparing $cluster template ==="
+  echo "=== prepare $cluster template ==="
   rm -rf _build
   mkdir -p _build/${cluster}
 }
@@ -34,14 +34,14 @@ function castTemplate() {
     --output-dir=_build/${cluster}/cfn \
     --context config=${configfile}
 
-  echo "=== casting $cluster dynamodb workspace templates ==="
+  echo "=== casting $cluster workspace dynamodb templates ==="
   gomplate \
     --left-delim='<<' --right-delim='>>' \
     --input-dir ./crossplane-terraform/templates/dynamodb \
     --output-dir=_build/${cluster}/workspaces/dynamodb \
     --context config=${configfile}
 
-  echo "=== casting $cluster s3 workspace templates ==="
+  echo "=== casting $cluster workspace s3 templates ==="
   gomplate \
     --left-delim='<<' --right-delim='>>' \
     --input-dir ./crossplane-terraform/templates/s3 \
@@ -53,6 +53,13 @@ function castTemplate() {
     --left-delim='<<' --right-delim='>>' \
     --input-dir ./crossplane-terraform/compositions/s3 \
     --output-dir=_build/${cluster}/compositions/s3 \
+    --context config=${configfile}    
+
+  echo "=== casting $cluster compositions dynamodb templates ==="
+  gomplate \
+    --left-delim='<<' --right-delim='>>' \
+    --input-dir ./crossplane-terraform/compositions/dynamodb \
+    --output-dir=_build/${cluster}/compositions/dynamodb \
     --context config=${configfile}    
 
 }
