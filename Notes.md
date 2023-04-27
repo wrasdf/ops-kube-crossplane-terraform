@@ -69,6 +69,9 @@ flag, but this is not recommended.
 - When I try to manually delete a dynamodb from AWS UI.
 ```
 Your delete table request encountered issues. Replica cannot be deleted because it has acted as a source region for new replica(s) being added to the table in the last 24 hours..
+
+Your delete table request encountered issues. User: arn:aws:sts::568431661506:assumed-role/ap-k8s-admin-cluster-568431661506/kerryw is not authorized to perform: application-autoscaling:DeregisterScalableTarget on resource: arn:aws:application-autoscaling:ap-southeast-2:568431661506:scalable-target/* because no identity-based policy allows the application-autoscaling:DeregisterScalableTarget action.
+
 ```
 
 - When I try to manually delete the dynamodb repica from AWS UI.
@@ -97,3 +100,9 @@ Error: error creating S3 bucket ACL for crossplane-terraform-s3-alpha-apse2-v1: 
   11: resource "aws_s3_bucket_acl" "crossplane_terraform_s3" {
 ```
   - Set ownership to be created first and put depends_on in acl resource
+
+- providerConfig error
+```
+Warning  CannotConnectToProvider  8s (x8 over 2m9s)  managed/workspace.tf.upbound.io  cannot get ProviderConfig: ProviderConfig.tf.upbound.io "default" not found
+```
+  - Update providerConfigRef in Composition Resource

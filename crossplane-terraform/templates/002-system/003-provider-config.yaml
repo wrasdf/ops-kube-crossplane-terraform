@@ -3,7 +3,6 @@ apiVersion: tf.upbound.io/v1beta1
 kind: ProviderConfig
 metadata:
   name: crossplane-provider-terraform-conf-v1
-  namespace: upbound-system
 spec:
   pluginCache: false
   configuration: |

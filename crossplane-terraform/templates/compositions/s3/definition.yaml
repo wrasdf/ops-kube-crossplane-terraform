@@ -24,11 +24,6 @@ spec:
             properties:
               bucket_name:
                 type: string
-              resourceConfig:
-                type: object
-                properties:
-                  providerConfigRef:
-                    type: string
             required:
               - bucket_name
           status:

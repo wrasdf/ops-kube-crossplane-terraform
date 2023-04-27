@@ -11,13 +11,6 @@ spec:
   compositeTypeRef:
     apiVersion: aws.crossplane.afterpay.cloud/v1beta1
     kind: XDynamodb
-  patchSets:
-    - name: common
-      patches:
-        - fromFieldPath: metadata.name
-          toFieldPath: spec.writeConnectionSecretToRef.name
-        - fromFieldPath: metadata.namespace
-          toFieldPath: spec.writeConnectionSecretToRef.namespace
   resources:
     - name: terraform-dynamodb
       base:
@@ -45,8 +38,6 @@ spec:
             providerConfigRef:
               name: crossplane-provider-terraform-conf-v1
       patches:
-        - type: PatchSet
-          patchSetName: common
         - fromFieldPath: spec.name
           toFieldPath: spec.forProvider.vars[0].value
         - fromFieldPath: spec.hash_key

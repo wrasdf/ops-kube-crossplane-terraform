@@ -11,13 +11,6 @@ spec:
   compositeTypeRef:
     apiVersion: aws.crossplane.afterpay.cloud/v1beta1
     kind: XS3
-  patchSets:
-    - name: common
-      patches:
-        - fromFieldPath: metadata.name
-          toFieldPath: spec.writeConnectionSecretToRef.name
-        - fromFieldPath: metadata.namespace
-          toFieldPath: spec.writeConnectionSecretToRef.namespace
   resources:
     - name: terraform-s3
       base:
@@ -67,12 +60,9 @@ spec:
               }
             vars:
               - key: bucket_name
-            providerConfigRef:
-              name: crossplane-provider-terraform-conf-v1
-
+          providerConfigRef:
+            name: crossplane-provider-terraform-conf-v1   
       patches:
-        - type: PatchSet
-          patchSetName: common
         - fromFieldPath: spec.bucket_name
           toFieldPath: spec.forProvider.vars[0].value
         - type: ToCompositeFieldPath
