@@ -5,8 +5,10 @@ aws:
 clusterName: beta-apse2-v1
 clusterId: 7B6E1EB035F5527F788217E3F82681CB
 namespace: pe
+s3:
+  name: crossplane-s3-beta-apse2-v1
 dynamodb:
-  name: crossplane-terraform-dynamodb-beta-apse2-v1
+  name: crossplane-dynamodb-beta-apse2-v1
   hash_key: UserId
   range_key: GameTitle
   global_secondary_indexes: 

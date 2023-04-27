@@ -5,6 +5,8 @@ aws:
 clusterName: alpha-apse2-v1
 clusterId: 4D8F1509D7EBBF3B897E54CD7880B2BA
 namespace: pe
+s3:
+  name: crossplane-terraform-s3-alpha-apse2-v1
 dynamodb:
   name: crossplane-terraform-dynamodb1-alpha-apse2-v1
   hash_key: UserId
