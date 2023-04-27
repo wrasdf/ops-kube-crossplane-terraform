@@ -63,6 +63,10 @@ spec:
           providerConfigRef:
             name: crossplane-provider-terraform-conf-v1
       patches:
+        - fromFieldPath: metadata.labels
+          toFieldPath: metadata.labels
+        - fromFieldPath: metadata.annotations
+          toFieldPath: metadata.annotations
         - fromFieldPath: spec.bucket_name
           toFieldPath: spec.forProvider.vars[0].value
         - type: ToCompositeFieldPath

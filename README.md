@@ -2,7 +2,6 @@
 crossplane with terraform-provider
 
 ### TODO List
-- How to setup terraform remote s3 as backend -> WIP
 
 - How to setup terrform kubernetes as backend -> ok
   - tf-status in the secrets of k8s upbound-system namespace:
@@ -26,6 +25,11 @@ crossplane with terraform-provider
   - k get workspace
   - k describe ...
 
+- How to setup terraform remote s3 as backend -> WIP
+
 - How to solve `state lock` error -> WIP
 
+### Known limits
+- add `writeConnectionSecretToRef` filed to workspace resources
+- https://github.com/upbound/provider-terraform/blob/main/README.md#known-limitations
 

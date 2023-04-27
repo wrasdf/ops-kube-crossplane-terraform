@@ -2,12 +2,14 @@
 apiVersion: aws.crossplane.afterpay.cloud/v1beta1
 kind: S3
 metadata:
-  name: composition-v8-<< .config.s3.name >>
+  name: composition-v9-<< .config.s3.name >>
   namespace: << .config.namespace >>
   labels:
-    version: v8
+    created_by: ops-kube-crossplane-terraform
+    team: platform-kompute
+    version: v9
 spec:
-  bucket_name: composition-v8-<< .config.s3.name >>
+  bucket_name: composition-v9-<< .config.s3.name >>
   compositionSelector:
     matchLabels:
       provider: terraform
