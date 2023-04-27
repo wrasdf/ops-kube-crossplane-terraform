@@ -61,12 +61,10 @@ spec:
             vars:
               - key: bucket_name
           providerConfigRef:
-            name: crossplane-provider-terraform-conf-v1   
+            name: crossplane-provider-terraform-conf-v1
       patches:
         - fromFieldPath: spec.bucket_name
           toFieldPath: spec.forProvider.vars[0].value
         - type: ToCompositeFieldPath
           fromFieldPath: status.atProvider.outputs.bucket_id
           toFieldPath: status.outputs.bucket_id
-          policy:
-            fromFieldPath: Optional
