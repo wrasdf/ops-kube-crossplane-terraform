@@ -30,6 +30,7 @@ crossplane with terraform-provider
 - How to solve `state lock` error -> WIP
 
 ### Known limits
-- add `writeConnectionSecretToRef` filed to workspace resources
+- add `writeConnectionSecretToRef` in Composition resource failed for workspace resource.
+- `ToCompositeFieldPath` in patches of Composition resource seems not working as expected.
 - https://github.com/upbound/provider-terraform/blob/main/README.md#known-limitations
 
