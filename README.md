@@ -6,7 +6,7 @@ crossplane with terraform-provider
 
 - How does terraform-provider works with IRSA -> ok
 
-- How to create dynamodb
+- How to create dynamodb (remote module)
   - workspace -> ok
   - composition - ok
 

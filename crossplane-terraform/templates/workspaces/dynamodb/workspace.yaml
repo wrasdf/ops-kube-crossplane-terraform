@@ -1,7 +1,7 @@
 apiVersion: tf.upbound.io/v1beta1
 kind: Workspace
 metadata:
-  name: crossplane-terraform-dynamodb-v1
+  name: workspace-<< .config.dynamodb.name >>
   namespace: << .config.namespace >>
 spec:
   forProvider:
@@ -42,7 +42,7 @@ spec:
           "type": "<< $attribute.type >>"
         <<- end >>
   writeConnectionSecretToRef:
-    namespace: upbound-system
-    name: crossplane-provider-terraform-dynamodb
+    namespace: << .config.namespace >>
+    name: << .config.dynamodb.name >>
   providerConfigRef:
     name: crossplane-provider-terraform-conf-v1

@@ -2,7 +2,7 @@
 apiVersion: tf.upbound.io/v1beta1
 kind: Workspace
 metadata:
-  name: crossplane-terraform-s3
+  name: workspace-<< .config.s3.name >>
   namespace: << .config.namespace >>
 spec:
   forProvider:
@@ -15,8 +15,10 @@ spec:
       resource "aws_s3_bucket" "crossplane_terraform_s3" {
         bucket = var.bucket_name
         tags = {
-          Name        = var.bucket_name
-          CreatedBy   = "crossplane terraform-provider"
+          name        = var.bucket_name
+          created_by  = "ops-kube-crossplane-terraform"
+          managed_by  = "crossplane terraform-provider"
+          team        = "Platform Kompute"
         }
       }
 
@@ -34,13 +36,11 @@ spec:
         value       = aws_s3_bucket.crossplane_terraform_s3.id
         description = "Bucket ARN"
       }
-
     vars:
       - key: bucket_name
         value: "crossplane-terraform-s3-<< .config.clusterName >>"
-  
   writeConnectionSecretToRef:
-    namespace: upbound-system
-    name: crossplane-terraform-s3
+    namespace: << .config.namespace >>
+    name: workspace-<< .config.s3.name >>
   providerConfigRef:
     name: crossplane-provider-terraform-conf-v1

@@ -14,8 +14,10 @@ spec:
   patchSets:
     - name: common
       patches:
-        - fromFieldPath: spec.resourceConfig.providerConfigRef
-          toFieldPath: spec.providerConfigRef.name
+        - fromFieldPath: metadata.name
+          toFieldPath: spec.writeConnectionSecretToRef.name
+        - fromFieldPath: metadata.namespace
+          toFieldPath: spec.writeConnectionSecretToRef.namespace
   resources:
     - name: terraform-dynamodb
       base:
@@ -38,6 +40,8 @@ spec:
               global_secondary_indexes: []
               replica_regions: []
               attributes: []
+            providerConfigRef:
+              name: crossplane-provider-terraform-conf-v1
       patches:
         - type: PatchSet
           patchSetName: common

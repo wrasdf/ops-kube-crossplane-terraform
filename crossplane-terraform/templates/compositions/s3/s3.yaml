@@ -6,8 +6,6 @@ metadata:
   namespace: << .config.namespace >>
 spec:
   bucket_name: composition-<< .config.s3.name >>
-  resourceConfig:
-    providerConfigRef: crossplane-provider-terraform-conf-v1
   compositionSelector:
     matchLabels:
       provider: terraform

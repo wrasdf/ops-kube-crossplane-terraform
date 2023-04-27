@@ -30,8 +30,6 @@ spec:
     - "name": "<< $attribute.name >>"
       "type": "<< $attribute.type >>"
     <<- end >>
-  resourceConfig:
-    providerConfigRef: crossplane-provider-terraform-conf-v1
   compositionSelector:
     matchLabels:
       provider: terraform
