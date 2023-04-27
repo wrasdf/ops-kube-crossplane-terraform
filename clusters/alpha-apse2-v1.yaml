@@ -8,7 +8,7 @@ namespace: pe
 s3:
   name: crossplane-terraform-s3-alpha-apse2-v1
 dynamodb:
-  name: crossplane-terraform-dynamodb1-alpha-apse2-v1
+  name: crossplane-terraform-dynamodb-alpha-apse2-v1
   hash_key: UserId
   range_key: GameTitle
   global_secondary_indexes: 

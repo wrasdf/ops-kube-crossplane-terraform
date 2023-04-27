@@ -5,7 +5,7 @@ metadata:
   name: composition-<< .config.dynamodb.name >>
   namespace: << .config.namespace >>
   labels:
-    version: v1
+    version: v2
 spec:
   name: composition-<< .config.dynamodb.name >>
   hash_key: << .config.dynamodb.hash_key >>

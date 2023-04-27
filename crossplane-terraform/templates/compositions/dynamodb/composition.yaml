@@ -52,3 +52,12 @@ spec:
           toFieldPath: spec.forProvider.varmap.replica_regions
         - fromFieldPath: spec.attributes
           toFieldPath: spec.forProvider.varmap.attributes
+        - type: ToCompositeFieldPath
+          fromFieldPath: status.atProvider.outputs.dynamodb_table_arn
+          toFieldPath: status.outputs.dynamodb_table_arn
+        - type: ToCompositeFieldPath
+          fromFieldPath: status.atProvider.outputs.dynamodb_table_id
+          toFieldPath: status.outputs.dynamodb_table_id
+        - type: ToCompositeFieldPath
+          fromFieldPath: status.atProvider.outputs.dynamodb_table_stream_arn
+          toFieldPath: status.outputs.dynamodb_table_stream_arn
