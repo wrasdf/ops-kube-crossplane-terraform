@@ -18,9 +18,9 @@ helm repo update
 helm template crossplane \
   --namespace upbound-system \
   crossplane-stable/crossplane \
-  --version 1.11.3 > ./crossplane-terraform/templates/system/001-crossplane.yaml
+  --version 1.11.3 > ./crossplane-terraform/templates/002-system/001-crossplane.yaml
 
 ./bin/compile.sh $cluster
 
-stackup "ops-kube-crossplane-terraform-privider-$cluster" up -t "_build/$cluster/cfn/template.yaml"
+stackup "ops-kube-crossplane-terraform-privider-$cluster" up -t "_build/$cluster/001-cfn/template.yaml"
 

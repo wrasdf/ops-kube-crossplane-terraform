@@ -9,10 +9,12 @@ spec:
     source: Inline
     initArgs:
       - -upgrade=true
+    planArgs:
+      - -parallelism=2  
     applyArgs:
       - -auto-approve
     module: |
-      resource "aws_s3_bucket" "crossplane_terraform_s3" {
+      resource "aws_s3_bucket" "this" {
         bucket = var.bucket_name
         tags = {
           name        = var.bucket_name
@@ -22,9 +24,17 @@ spec:
         }
       }
 
-      resource "aws_s3_bucket_acl" "crossplane_terraform_s3" {
-        bucket = aws_s3_bucket.crossplane_terraform_s3.id
+      resource "aws_s3_bucket_acl" "this" {
+        bucket = aws_s3_bucket.this.id
         acl    = "private"
+        depends_on = [aws_s3_bucket_ownership_controls.this]
+      }
+
+      resource "aws_s3_bucket_ownership_controls" "this" {
+        bucket = aws_s3_bucket.this.id
+        rule {
+          object_ownership = "BucketOwnerPreferred"
+        }
       }
 
       variable "bucket_name" {
@@ -33,12 +43,12 @@ spec:
       }
 
       output "bucket_id" {
-        value       = aws_s3_bucket.crossplane_terraform_s3.id
+        value       = aws_s3_bucket.this.id
         description = "Bucket ARN"
       }
     vars:
       - key: bucket_name
-        value: "crossplane-terraform-s3-<< .config.clusterName >>"
+        value: "workspace-<< .config.s3.name >>"
   writeConnectionSecretToRef:
     namespace: << .config.namespace >>
     name: workspace-<< .config.s3.name >>

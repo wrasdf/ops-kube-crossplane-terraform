@@ -25,11 +25,13 @@ spec:
         kind: Workspace
         spec:
           forProvider:
+            source: Remote
             initArgs:
               - -upgrade=true
+            planArgs:
+              - -parallelism=2
             applyArgs:
               - -auto-approve
-            source: Remote
             module: git::https://github.com/wrasdf/terraform-dynamodb.git?ref=main
             vars:
               - key: name

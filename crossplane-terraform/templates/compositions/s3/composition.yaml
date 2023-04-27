@@ -26,18 +26,34 @@ spec:
         spec:
           forProvider:
             source: Inline
+            initArgs:
+              - -upgrade=true
+            planArgs:
+              - -parallelism=2
+            applyArgs:
+              - -auto-approve
             module: |
-              resource "aws_s3_bucket" "crossplane_composition_s3" {
+              resource "aws_s3_bucket" "this" {
                 bucket = var.bucket_name
                 tags = {
-                  Name        = var.bucket_name
-                  CreatedBy   = "crossplane terraform-provider"
+                  name        = var.bucket_name
+                  created_by  = "ops-kube-crossplane-terraform"
+                  managed_by  = "crossplane terraform-provider"
+                  team        = "Platform Kompute"
                 }
               }
 
-              resource "aws_s3_bucket_acl" "crossplane_composition_s3" {
-                bucket = aws_s3_bucket.crossplane_composition_s3.id
+              resource "aws_s3_bucket_acl" "this" {
+                bucket = aws_s3_bucket.this.id
                 acl    = "private"
+                depends_on = [aws_s3_bucket_ownership_controls.this]
+              }
+
+              resource "aws_s3_bucket_ownership_controls" "this" {
+                bucket = aws_s3_bucket.this.id
+                rule {
+                  object_ownership = "BucketOwnerPreferred"
+                }
               }
 
               variable "bucket_name" {
@@ -46,7 +62,7 @@ spec:
               }
 
               output "bucket_id" {
-                value       = aws_s3_bucket.crossplane_composition_s3.id
+                value       = aws_s3_bucket.this.id
                 description = "Bucket ARN"
               }
             vars:
