@@ -73,36 +73,3 @@ Your delete table request encountered issues. Replica cannot be deleted because 
 Your delete table request encountered issues. User: arn:aws:sts::568431661506:assumed-role/ap-k8s-admin-cluster-568431661506/kerryw is not authorized to perform: application-autoscaling:DeregisterScalableTarget on resource: arn:aws:application-autoscaling:ap-southeast-2:568431661506:scalable-target/* because no identity-based policy allows the application-autoscaling:DeregisterScalableTarget action.
 
 ```
-
-- When I try to manually delete the dynamodb repica from AWS UI.
-  - First Try
-  ```
-  An error occurred when deleting the replica: The resource which you are attempting to change is in use.
-  ```
-  - wait 5 mins
-  - Second Try
-  ```
-  Deleting the replica of the crossplane-terraform-dynamodb1-alpha-apse2-v1 table in the us-east-1 Region. This might take a few minutes.
-  ```
-
-
-- Got s3 access error 
-
-```
-echo "H4sIAAAAAAAA/5yQPY/aQBBA6+yvGLmNTTAmyLKUAkxQPsBEMSGBxlrbg73Ksmt21tjH/fkT91mcrrlqiqd5M3rsqzHaRIDXAYVBboWqIA0gb4v/aGEaL+FwjzRRI7lCz6Ix/KDN0aPA47KpuccbwpF39iOYFgUSxVpZo+VSkE20Tdum0cZiGcGmxidzqZFAaQtcSt1dDxH7QJbblqDQJUYwHg5dMHhqkSyIMoIf31azZPd3lmzTSbz9uXCh1o9ITYejZH7+/f20mez7P7WIlx1tL+G48/tFG3xqq/5X3Cefd8F8zf+pG1/naV6vRlXcXParj+s8oMkllFW4CL8wBtAJWwPvKKMge3g444UcvGTInjNkFLgMQCs4cqEG9gBSKATfd0EoMEi6NQWC88rmgPOGz4kYgO9H79yGW8buAAAA//8BAAD//0XynYXaAQAA" | base64 -d | gunzip
-
-
-Error: error creating S3 bucket ACL for crossplane-terraform-s3-alpha-apse2-v1: AccessControlListNotSupported: The bucket does not allow ACLs
-	status code: 400, request id: WWHXW9DHN8Q87D58, host id: aO3HDSiWEO1Au0M9EOzZmEn+pyv4AxVlJYSibOJBK/74FF+CcIPDCYjTCnjOtZUwN8kvsO2QWfJuvzlEY1c/yw==
-
-  with aws_s3_bucket_acl.crossplane_terraform_s3,
-  on main.tf line 11, in resource "aws_s3_bucket_acl" "crossplane_terraform_s3":
-  11: resource "aws_s3_bucket_acl" "crossplane_terraform_s3" {
-```
-  - Set ownership to be created first and put depends_on in acl resource
-
-- providerConfig error
-```
-Warning  CannotConnectToProvider  8s (x8 over 2m9s)  managed/workspace.tf.upbound.io  cannot get ProviderConfig: ProviderConfig.tf.upbound.io "default" not found
-```
-  - Update providerConfigRef in Composition Resource
