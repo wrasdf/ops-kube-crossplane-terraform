@@ -25,12 +25,30 @@ crossplane with terraform-provider
   - k get workspace
   - k describe ...
 
-- How to setup terraform remote s3 as backend -> WIP
+- How to delete workspace -> ok
+  - AWS resources wil be delete as well
+  - Notes: 
+    - Need to remove `finalizer` in workspace first
 
-- How to solve `state lock` error -> WIP
+- How to delete Composition `Claim` -> ok
+  - Workspace will be delete 
+  - AWS resources wil be delete as well
 
-### Known limits
+
+### Issus
 - add `writeConnectionSecretToRef` in Composition resource failed for workspace resource.
 - `ToCompositeFieldPath` in patches of Composition resource seems not working as expected.
+
+
+### Known limits
 - https://github.com/upbound/provider-terraform/blob/main/README.md#known-limitations
 
+- Not support `terraform plan` show diff for us
+  - https://github.com/upbound/provider-terraform/issues/86
+
+- Not support `import values` to existing terraform status.
+
+- Hard to handle `state lock` during pod restart/update
+  - https://github.com/crossplane-contrib/provider-terraform/issues/46
+
+- Not support remote backend state with ProviderConfig for compostion mode. eg: s3
