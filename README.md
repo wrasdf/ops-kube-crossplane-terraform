@@ -1,7 +1,7 @@
 # ops-kube-crossplane-terraform
 crossplane with terraform-provider
 
-### TODO List
+### Investigate Scenarios
 
 - How to setup terrform kubernetes as backend -> ok
   - tf-status in the secrets of k8s upbound-system namespace:
@@ -26,13 +26,13 @@ crossplane with terraform-provider
   - k describe ...
 
 - How to delete workspace -> ok
-  - AWS resources wil be delete as well
+  - AWS resources wil be deleted as well
   - Notes: 
     - Need to remove `finalizer` in workspace first
 
 - How to delete Composition `Claim` -> ok
-  - Workspace will be delete 
-  - AWS resources wil be delete as well
+  - Workspace will be deleted 
+  - AWS resources wil be deleted as well
 
 
 ### Issus
