@@ -35,7 +35,7 @@ crossplane with terraform-provider
   - AWS resources wil be deleted as well
 
 
-### Issus
+### Issus (01/05/2023)
 - add `writeConnectionSecretToRef` in Composition resource will cause workspace could not be created.
 - `ToCompositeFieldPath` in patches of Composition resource not showing the output status.
 
