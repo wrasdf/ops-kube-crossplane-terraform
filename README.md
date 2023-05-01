@@ -40,7 +40,7 @@ crossplane with terraform-provider
 - `ToCompositeFieldPath` in patches of Composition resource seems not working as expected.
 
 
-### Known limits
+### Known limits (01/05/2023)
 - https://github.com/upbound/provider-terraform/blob/main/README.md#known-limitations
 
 - Not support `terraform plan` show diff for us
@@ -52,3 +52,4 @@ crossplane with terraform-provider
   - https://github.com/crossplane-contrib/provider-terraform/issues/46
 
 - Not support remote backend state with ProviderConfig for compostion mode. eg: s3
+  - https://github.com/upbound/provider-terraform/issues/49
