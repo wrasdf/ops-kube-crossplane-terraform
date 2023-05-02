@@ -29,4 +29,8 @@ spec:
           status:
             description: Status defines the observed state of Terraform
             type: object
-            x-kubernetes-preserve-unknown-fields: true
+            properties:
+              outputs:
+                description: Freeform field containing status information for eks
+                type: object
+                x-kubernetes-preserve-unknown-fields: true

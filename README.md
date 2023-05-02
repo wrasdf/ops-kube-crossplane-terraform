@@ -37,7 +37,6 @@ Crossplane with terraform-provider
 
 ### Issus (01/05/2023)
 - add `writeConnectionSecretToRef` in Composition resource will cause workspace could not be created.
-- `ToCompositeFieldPath` in patches of Composition resource not showing the output status.
 
 
 ### Known limits (01/05/2023)
