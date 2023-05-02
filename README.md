@@ -1,23 +1,23 @@
 # ops-kube-crossplane-terraform
-crossplane with terraform-provider
+Crossplane with terraform-provider
 
 ### Investigate Scenarios
 
-- How to setup terrform kubernetes as backend -> ok
-  - tf-status in the secrets of k8s upbound-system namespace:
+- As a user, I would like to create a dynamodb with `Remote terraform moudle`.
+  - Workspace mode -> passed
+  - Composition mode -> passed
+
+- As a user, I would like to create a s3 bucket with `terraform inline code` .
+  - Workspace mode -> passed
+  - Composition mode -> passed
+
+- As a user, I would like to setup Kuernetes Secrets as terraform backend to store the state. 
+  - tf-status in the secrets of `upbound-system` namespace. eg:
     - tfstate-workspace-crossplane-terraform-s3-alpha-apse2-v1-crossplane-terraform-provider-config-alpha-apse2-v1
 
-- How does terraform-provider works with IRSA -> ok
+- As an admin user, I would like to config IRSA for terraform-provider.
 
-- How to create dynamodb (remote module)
-  - workspace -> ok
-  - composition - ok
-
-- How to create s3
-  - workspace -> ok
-  - composition -> ok
-
-- How to debug the issues
+- As a user/admin user, how could I debug the issues.
   - k get s3
   - k get dynamodb
   - k get Composition
@@ -25,13 +25,13 @@ crossplane with terraform-provider
   - k get workspace
   - k describe ...
 
-- How to delete workspace -> ok
+- As a user/admin user, I would like to delete workspace resource.
   - AWS resources wil be deleted as well
   - Notes: 
     - Need to remove `finalizer` in workspace first
 
-- How to delete Composition `Claim` -> ok
-  - Workspace will be deleted 
+- As a user/admin user, I would like to delete Compoistion `Claim` resource. 
+  - Workspace will be deleted. 
   - AWS resources wil be deleted as well
 
 
@@ -51,5 +51,5 @@ crossplane with terraform-provider
 - Hard to handle `state lock` during pod restart/update
   - https://github.com/crossplane-contrib/provider-terraform/issues/46
 
-- Not support remote backend state with ProviderConfig for compostion mode. eg: s3
+- Not support `remote backend state` with ProviderConfig for compostion mode. eg: s3
   - https://github.com/upbound/provider-terraform/issues/49
