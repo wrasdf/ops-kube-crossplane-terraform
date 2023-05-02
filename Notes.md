@@ -63,4 +63,3 @@ by multiple users at the same time. Please resolve the issue above and try
 again. For most commands, you can disable locking with the "-lock=false"
 flag, but this is not recommended.
 ```
-  - `I don't know which terraform resources got this error`

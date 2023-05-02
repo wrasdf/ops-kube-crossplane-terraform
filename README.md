@@ -43,13 +43,24 @@ Crossplane with terraform-provider
 ### Known limits (01/05/2023)
 - https://github.com/upbound/provider-terraform/blob/main/README.md#known-limitations
 
-- Not support `terraform plan` show diff for us
-  - https://github.com/upbound/provider-terraform/issues/86
-
-- Not support `import values` to existing terraform status.
-
-- Hard to handle `state lock` during pod restart/update
-  - https://github.com/crossplane-contrib/provider-terraform/issues/46
-
 - Not support `remote backend state` with ProviderConfig for compostion mode. eg: s3
   - https://github.com/upbound/provider-terraform/issues/49
+
+### Hackway to get more terraform features  (02/05/2023)
+- kubectl get pods -n upbound-system 
+- kubectl exec -it crossplane-provider-terraform-* -- bash
+  - cd /tf/<3ae97dd0-e129-4af4-baf5-d8da03b1dcc1>
+  - terraform init
+  - terraform plan
+  - terraform apply
+  - terraform import 
+
+- The terraform features are not offically support yet:
+  - `terraform plan` show diff for us
+    - https://github.com/upbound/provider-terraform/issues/86
+
+  - `state lock` issue during pod restart/update
+    - https://github.com/crossplane-contrib/provider-terraform/issues/46
+
+  - `import values` to existing terraform status.  
+
