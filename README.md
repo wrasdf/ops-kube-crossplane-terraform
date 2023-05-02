@@ -64,5 +64,7 @@ Crossplane with terraform-provider
     - terraform plan
     - terraform apply
     - terraform import
-    - terraform force-unlock <7d650acb-74de-b97b-e209-589775afa435>
+    - terraform force-unlock <3ae97dd0-e129-4af4-baf5-d8da03b1dcc1>
+  - Note:
+    - `3ae97dd0-e129-4af4-baf5-d8da03b1dcc1` is the UID of the k8s resource.  
 
