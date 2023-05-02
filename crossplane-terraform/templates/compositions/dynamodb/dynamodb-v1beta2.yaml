@@ -1,13 +1,13 @@
 ---
-apiVersion: aws.crossplane.afterpay.cloud/v1beta1
+apiVersion: aws.crossplane.afterpay.cloud/v1beta2
 kind: Dynamodb
 metadata:
-  name: composition-<< .config.dynamodb.name >>
+  name: composition-<< .config.dynamodb.name >>-v1beta2
   namespace: << .config.namespace >>
   labels:
     created_by: ops-kube-crossplane-terraform
     team: platform-kompute
-    version: v8
+    version: v1beta2
 spec:
   name: composition-<< .config.dynamodb.name >>
   hash_key: << .config.dynamodb.hash_key >>
