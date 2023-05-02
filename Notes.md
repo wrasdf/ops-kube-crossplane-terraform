@@ -64,12 +64,3 @@ again. For most commands, you can disable locking with the "-lock=false"
 flag, but this is not recommended.
 ```
   - `I don't know which terraform resources got this error`
-
-
-- When I try to manually delete a dynamodb from AWS UI.
-```
-Your delete table request encountered issues. Replica cannot be deleted because it has acted as a source region for new replica(s) being added to the table in the last 24 hours..
-
-Your delete table request encountered issues. User: arn:aws:sts::568431661506:assumed-role/ap-k8s-admin-cluster-568431661506/kerryw is not authorized to perform: application-autoscaling:DeregisterScalableTarget on resource: arn:aws:application-autoscaling:ap-southeast-2:568431661506:scalable-target/* because no identity-based policy allows the application-autoscaling:DeregisterScalableTarget action.
-
-```
