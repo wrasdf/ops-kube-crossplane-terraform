@@ -63,5 +63,6 @@ Crossplane with terraform-provider
     - terraform init
     - terraform plan
     - terraform apply
-    - terraform import 
+    - terraform import
+    - terraform force-unlock <7d650acb-74de-b97b-e209-589775afa435>
 
