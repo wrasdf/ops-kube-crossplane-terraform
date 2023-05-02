@@ -31,6 +31,6 @@ spec:
             type: object
             properties:
               outputs:
-                description: Freeform field containing status information for eks
+                description: Freeform field containing status information for s3
                 type: object
                 x-kubernetes-preserve-unknown-fields: true

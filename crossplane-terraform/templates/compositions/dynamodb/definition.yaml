@@ -56,6 +56,6 @@ spec:
             type: object
             properties:
               outputs:
-                description: Freeform field containing status information for eks
+                description: Freeform field containing status information for dynamodb
                 type: object
                 x-kubernetes-preserve-unknown-fields: true
