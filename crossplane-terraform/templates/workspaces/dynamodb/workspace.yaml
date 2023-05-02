@@ -10,7 +10,7 @@ spec:
     applyArgs:
       - -auto-approve
     source: Remote
-    module: git::https://github.com/wrasdf/terraform-dynamodb.git?ref=main
+    module: git::https://github.com/wrasdf/terraform-dynamodb.git//v1beta1?ref=main
     vars:
       - key: name
         value: "<< .config.dynamodb.name >>"
