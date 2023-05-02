@@ -36,7 +36,7 @@ Crossplane with terraform-provider
 
 
 ### Issus (01/05/2023)
-- add `writeConnectionSecretToRef` in Composition resource will cause workspace could not be created.
+- add `writeConnectionSecretToRef` in Composition resource will cause `workspace` could not be created.
 
 
 ### Known limits (01/05/2023)
