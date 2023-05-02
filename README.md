@@ -47,13 +47,14 @@ Crossplane with terraform-provider
   - https://github.com/upbound/provider-terraform/issues/49
 
 ### Hackway to get more terraform features  (02/05/2023)
-- kubectl get pods -n upbound-system 
-- kubectl exec -it crossplane-provider-terraform-* -- bash
-  - cd /tf/<3ae97dd0-e129-4af4-baf5-d8da03b1dcc1>
-  - terraform init
-  - terraform plan
-  - terraform apply
-  - terraform import 
+- Hack steps:
+  - kubectl get pods -n upbound-system 
+  - kubectl exec -it crossplane-provider-terraform-* -- bash
+    - cd /tf/<3ae97dd0-e129-4af4-baf5-d8da03b1dcc1>
+    - terraform init
+    - terraform plan
+    - terraform apply
+    - terraform import 
 
 - The terraform features are not offically support yet:
   - `terraform plan` show diff for us
