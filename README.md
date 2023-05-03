@@ -1,5 +1,4 @@
 # ops-kube-crossplane-terraform
-Crossplane with terraform-provider
 
 ### Concept of crossplane with terraform provider
 
