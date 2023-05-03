@@ -1,0 +1,68 @@
+---
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  name: tf-xdynamodb.aws.v1beta1.crossplane.afterpay.cloud
+  namespace: upbound-system
+  labels:
+    provider: terraform
+    version: v1beta1
+spec:
+  writeConnectionSecretsToNamespace: upbound-system
+  compositeTypeRef:
+    apiVersion: aws.v1beta1.crossplane.afterpay.cloud/v1beta1
+    kind: XDynamodb
+  resources:
+    - name: terraform-dynamodb
+      base:
+        apiVersion: tf.upbound.io/v1beta1
+        kind: Workspace
+        spec:
+          forProvider:
+            source: Remote
+            initArgs:
+              - -upgrade=true
+            planArgs:
+              - -parallelism=2
+            applyArgs:
+              - -auto-approve
+            module: git::https://github.com/wrasdf/terraform-dynamodb.git//v1beta1?ref=main
+            vars:
+              - key: name
+              - key: hash_key
+              - key: range_key
+            varmap:
+              local_secondary_indexes: []
+              global_secondary_indexes: []
+              replica_regions: []
+              attributes: []
+            providerConfigRef:
+              name: crossplane-provider-terraform-conf-v1
+      patches:
+        - fromFieldPath: metadata.labels
+          toFieldPath: metadata.labels
+        - fromFieldPath: metadata.annotations
+          toFieldPath: metadata.annotations
+        - fromFieldPath: spec.name
+          toFieldPath: spec.forProvider.vars[0].value
+        - fromFieldPath: spec.hash_key
+          toFieldPath: spec.forProvider.vars[1].value
+        - fromFieldPath: spec.range_key
+          toFieldPath: spec.forProvider.vars[2].value
+        - fromFieldPath: spec.local_secondary_indexes
+          toFieldPath: spec.forProvider.varmap.local_secondary_indexes
+        - fromFieldPath: spec.global_secondary_indexes
+          toFieldPath: spec.forProvider.varmap.global_secondary_indexes
+        - fromFieldPath: spec.replica_regions
+          toFieldPath: spec.forProvider.varmap.replica_regions
+        - fromFieldPath: spec.attributes
+          toFieldPath: spec.forProvider.varmap.attributes
+        - type: ToCompositeFieldPath
+          fromFieldPath: status.atProvider.outputs.dynamodb_table_arn
+          toFieldPath: status.outputs.dynamodb_table_arn
+        - type: ToCompositeFieldPath
+          fromFieldPath: status.atProvider.outputs.dynamodb_table_id
+          toFieldPath: status.outputs.dynamodb_table_id
+        - type: ToCompositeFieldPath
+          fromFieldPath: status.atProvider.outputs.dynamodb_table_stream_arn
+          toFieldPath: status.outputs.dynamodb_table_stream_arn

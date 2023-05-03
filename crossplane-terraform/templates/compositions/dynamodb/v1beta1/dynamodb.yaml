@@ -1,15 +1,15 @@
 ---
-apiVersion: aws.crossplane.afterpay.cloud/v1beta1
+apiVersion: aws.v1beta1.crossplane.afterpay.cloud/v1beta1
 kind: Dynamodb
 metadata:
-  name: composition-<< .config.dynamodb.name >>
+  name: composition-<< .config.dynamodb.name >>-v1beta1
   namespace: << .config.namespace >>
   labels:
     created_by: ops-kube-crossplane-terraform
     team: platform-kompute
-    version: v8
+    version: v1beta1
 spec:
-  name: composition-<< .config.dynamodb.name >>
+  name: composition-<< .config.dynamodb.name >>-v1beta1
   hash_key: << .config.dynamodb.hash_key >>
   range_key: << .config.dynamodb.range_key >>
   global_secondary_indexes:
@@ -37,3 +37,4 @@ spec:
   compositionSelector:
     matchLabels:
       provider: terraform
+      version: v1beta1

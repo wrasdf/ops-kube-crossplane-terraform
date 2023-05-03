@@ -6,9 +6,9 @@ clusterName: alpha-apse2-v1
 clusterId: 4D8F1509D7EBBF3B897E54CD7880B2BA
 namespace: pe
 s3:
-  name: crossplane-terraform-s3-alpha-apse2-v1
+  name: s3-alpha-apse2-v1
 dynamodb:
-  name: crossplane-terraform-dynamodb-alpha-apse2-v1
+  name: dynamodb-alpha-apse2-v1
   hash_key: UserId
   range_key: GameTitle
   global_secondary_indexes: 

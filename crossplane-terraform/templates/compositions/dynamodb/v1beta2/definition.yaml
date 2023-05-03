@@ -2,9 +2,11 @@
 apiVersion: apiextensions.crossplane.io/v1
 kind: CompositeResourceDefinition
 metadata:
-  name: xdynamodb.aws.crossplane.afterpay.cloud
+  name: xdynamodb.aws.v1beta2.crossplane.afterpay.cloud
+  labels:
+    version: v1beta2
 spec:
-  group: aws.crossplane.afterpay.cloud
+  group: aws.v1beta2.crossplane.afterpay.cloud
   names:
     kind: XDynamodb
     plural: xdynamodb
@@ -12,7 +14,7 @@ spec:
     kind: Dynamodb
     plural: dynamodb
   versions:
-  - name: v1beta1
+  - name: v1beta2
     served: true
     referenceable: true
     schema:

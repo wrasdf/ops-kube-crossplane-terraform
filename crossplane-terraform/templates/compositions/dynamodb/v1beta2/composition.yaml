@@ -2,14 +2,15 @@
 apiVersion: apiextensions.crossplane.io/v1
 kind: Composition
 metadata:
-  name: tf-xdynamodb.aws.crossplane.afterpay.cloud
+  name: tf-xdynamodb.aws.v1beta2.crossplane.afterpay.cloud
   namespace: upbound-system
   labels:
     provider: terraform
+    version: v1beta2
 spec:
   writeConnectionSecretsToNamespace: upbound-system
   compositeTypeRef:
-    apiVersion: aws.crossplane.afterpay.cloud/v1beta1
+    apiVersion: aws.v1beta2.crossplane.afterpay.cloud/v1beta2
     kind: XDynamodb
   resources:
     - name: terraform-dynamodb
@@ -25,7 +26,7 @@ spec:
               - -parallelism=2
             applyArgs:
               - -auto-approve
-            module: git::https://github.com/wrasdf/terraform-dynamodb.git//v1beta1?ref=main
+            module: git::https://github.com/wrasdf/terraform-dynamodb.git//v1beta2?ref=main
             vars:
               - key: name
               - key: hash_key

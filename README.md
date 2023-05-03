@@ -34,6 +34,8 @@ Crossplane with terraform-provider
   - Workspace will be deleted. 
   - AWS resources wil be deleted as well
 
+- As a admin user, I would like to upgrade my version from v1beta1 to v1beta2. (As there are breaking changes betwwen these two versions.)
+  - 
 
 ### Issus (01/05/2023)
 - add `writeConnectionSecretToRef` in Composition resource will cause `workspace` could not be created.

@@ -21,6 +21,7 @@
 ### Others
 - k get provider.pkg.crossplane.io
 - k get providerconfig.tf.upbound.io
+- k get compositionrevisions
 
 ### patchSet in Composition
 ```
@@ -62,4 +63,9 @@ Terraform acquires a state lock to protect the state from being written
 by multiple users at the same time. Please resolve the issue above and try
 again. For most commands, you can disable locking with the "-lock=false"
 flag, but this is not recommended.
+```
+
+- workspace name longs issue
+```
+Warning  ConfigureCompositeResource  45s                 offered/compositeresourcedefinition.apiextensions.crossplane.io  cannot configure composite resource: cannot use dry-run create to name composite resource: XDynamodb.aws.crossplane.afterpay.cloud "composition-crossplane-terraform-dynamodb-alpha-apse2-v1-v9vdlt" is invalid: metadata.labels: Invalid value: "composition-crossplane-terraform-dynamodb-alpha-apse2-v1-v1beta1": must be no more than 63 characters
 ```
