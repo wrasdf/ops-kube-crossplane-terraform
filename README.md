@@ -35,10 +35,11 @@ Crossplane with terraform-provider
   - AWS resources wil be deleted as well
 
 - As a admin user, I would like to upgrade my version from v1beta1 to v1beta2. (As there are breaking changes betwwen these two versions.)
-  - 
+  - create v1beta1 & v1beta2 use different tf files. eg: compositions/dynamodb
 
 ### Issus (01/05/2023)
 - add `writeConnectionSecretToRef` in Composition resource will cause `workspace` could not be created.
+- 
 
 
 ### Known limits (01/05/2023)
@@ -46,6 +47,8 @@ Crossplane with terraform-provider
 
 - Not support `remote backend state` with ProviderConfig for compostion mode. eg: s3
   - https://github.com/upbound/provider-terraform/issues/49
+
+- Not support `CompositeResourceDefinition` with multiple apiVersions.
 
 ### Hackway to get more terraform features  (02/05/2023)
 - The terraform features are not offically support yet:
