@@ -21,6 +21,7 @@
 ### Others
 - k get provider.pkg.crossplane.io
 - k get providerconfig.tf.upbound.io
+- k get compositionrevisions
 
 ### patchSet in Composition
 ```

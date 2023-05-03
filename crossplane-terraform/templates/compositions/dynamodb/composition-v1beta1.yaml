@@ -6,6 +6,7 @@ metadata:
   namespace: upbound-system
   labels:
     provider: terraform
+    version: v1beta1
 spec:
   writeConnectionSecretsToNamespace: upbound-system
   compositeTypeRef:
@@ -25,11 +26,15 @@ spec:
               - -parallelism=2
             applyArgs:
               - -auto-approve
+<<<<<<< HEAD
 <<<<<<< HEAD:crossplane-terraform/templates/compositions/dynamodb/composition.yaml
             module: git::https://github.com/wrasdf/terraform-dynamodb.git//v1beta1?ref=main
 =======
             module: git::https://github.com/wrasdf/terraform-dynamodb.git//v1beta2?ref=main
 >>>>>>> f8db41c (spike different version):crossplane-terraform/templates/compositions/dynamodb/composition-v1beta1.yaml
+=======
+            module: git::https://github.com/wrasdf/terraform-dynamodb.git//v1beta1?ref=main
+>>>>>>> eea8ed4 (Add multiple apiVersion support v1)
             vars:
               - key: name
               - key: hash_key
