@@ -2,9 +2,11 @@
 apiVersion: apiextensions.crossplane.io/v1
 kind: CompositeResourceDefinition
 metadata:
-  name: xs3.aws.crossplane.afterpay.cloud
+  name: xs3.aws.v1beta1.crossplane.afterpay.cloud
+  labels:
+    version: v1beta1
 spec:
-  group: aws.crossplane.afterpay.cloud
+  group: aws.v1beta1.crossplane.afterpay.cloud
   names:
     kind: XS3
     plural: xs3

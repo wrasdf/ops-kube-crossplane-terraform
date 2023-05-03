@@ -2,7 +2,7 @@
 apiVersion: apiextensions.crossplane.io/v1
 kind: Composition
 metadata:
-  name: tf-xdynamodb-v1beta1.aws.crossplane.afterpay.cloud
+  name: tf-xdynamodb.aws.v1beta1.crossplane.afterpay.cloud
   namespace: upbound-system
   labels:
     provider: terraform
@@ -10,7 +10,7 @@ metadata:
 spec:
   writeConnectionSecretsToNamespace: upbound-system
   compositeTypeRef:
-    apiVersion: aws.crossplane.afterpay.cloud/v1beta1
+    apiVersion: aws.v1beta1.crossplane.afterpay.cloud/v1beta1
     kind: XDynamodb
   resources:
     - name: terraform-dynamodb

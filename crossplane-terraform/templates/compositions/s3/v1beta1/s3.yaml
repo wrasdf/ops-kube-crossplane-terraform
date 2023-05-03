@@ -1,0 +1,16 @@
+---
+apiVersion: aws.v1beta1.crossplane.afterpay.cloud/v1beta1
+kind: S3
+metadata:
+  name: composition-<< .config.s3.name >>
+  namespace: << .config.namespace >>
+  labels:
+    created_by: ops-kube-crossplane-terraform
+    team: platform-kompute
+    version: v1beta1
+spec:
+  bucket_name: composition-<< .config.s3.name >>
+  compositionSelector:
+    matchLabels:
+      provider: terraform
+      version: v1beta1

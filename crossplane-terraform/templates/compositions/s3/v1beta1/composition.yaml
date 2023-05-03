@@ -2,14 +2,15 @@
 apiVersion: apiextensions.crossplane.io/v1
 kind: Composition
 metadata:
-  name: tf-xs3.aws.crossplane.afterpay.cloud
+  name: tf-xs3.aws.v1beta1.crossplane.afterpay.cloud
   namespace: upbound-system
   labels:
     provider: terraform
+    version: v1beta1
 spec:
   writeConnectionSecretsToNamespace: upbound-system
   compositeTypeRef:
-    apiVersion: aws.crossplane.afterpay.cloud/v1beta1
+    apiVersion: aws.v1beta1.crossplane.afterpay.cloud/v1beta1
     kind: XS3
   resources:
     - name: terraform-s3
@@ -33,6 +34,7 @@ spec:
                   created_by  = "ops-kube-crossplane-terraform"
                   managed_by  = "crossplane terraform-provider"
                   team        = "Platform Kompute"
+                  version     = "v1beta1"
                 }
               }
 

@@ -1,5 +1,5 @@
 ---
-apiVersion: aws.crossplane.afterpay.cloud/v1beta2
+apiVersion: aws.v1beta2.crossplane.afterpay.cloud/v1beta2
 kind: Dynamodb
 metadata:
   name: composition-<< .config.dynamodb.name >>-v1beta2
@@ -9,7 +9,7 @@ metadata:
     team: platform-kompute
     version: v1beta2
 spec:
-  name: composition-<< .config.dynamodb.name >>
+  name: composition-<< .config.dynamodb.name >>-v1beta2
   hash_key: << .config.dynamodb.hash_key >>
   range_key: << .config.dynamodb.range_key >>
   global_secondary_indexes:
@@ -25,10 +25,7 @@ spec:
         - "<< $nka >>"
         <<- end >>
     <<- end >>
-  replica_regions:
-    <<- range $region := .config.dynamodb.replica_regions >>
-    - "<< $region >>"
-    <<- end >>
+  replica_regions: []
   attributes:
     <<- range $attribute := .config.dynamodb.attributes >>
     - "name": "<< $attribute.name >>"
