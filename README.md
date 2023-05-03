@@ -1,6 +1,10 @@
 # ops-kube-crossplane-terraform
 Crossplane with terraform-provider
 
+### Concept of crossplane with terraform provider
+
+![Concept of crossplane with terraform provider](images/concept.png)
+
 ### Investigate Scenarios
 
 - As a user, I would like to create a dynamodb with `Remote terraform moudle`.
@@ -37,9 +41,10 @@ Crossplane with terraform-provider
 - As a admin user, I would like to upgrade my version from v1beta1 to v1beta2. (As there are breaking changes betwwen these two versions.)
   - create v1beta1 & v1beta2 use different tf files. eg: compositions/dynamodb
 
+- As a admin user, how do I migrate existing AWS Resources (RDS) into this compostion mode. ??
+
 ### Issus (01/05/2023)
 - add `writeConnectionSecretToRef` in Composition resource will cause `workspace` could not be created.
-- 
 
 
 ### Known limits (01/05/2023)

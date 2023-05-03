@@ -11,3 +11,5 @@ crash.log
 crash.*.log
 
 _build
+
+.DS_Store
