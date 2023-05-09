@@ -44,7 +44,7 @@
 
 ### Issus (01/05/2023)
 - add `writeConnectionSecretToRef` in Composition resource will cause `workspace` could not be created.
-
+- not support annotation `crossplane.io/paused: "true"` in compostion mode.
 
 ### Known limits (01/05/2023)
 - https://github.com/upbound/provider-terraform/blob/main/README.md#known-limitations

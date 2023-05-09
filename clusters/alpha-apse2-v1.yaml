@@ -20,7 +20,7 @@ dynamodb:
       projection_type: INCLUDE
       non_key_attributes: 
         - UserId
-  replica_regions: 
+  replica_regions:
     - us-east-1
     - eu-west-1
   attributes: 

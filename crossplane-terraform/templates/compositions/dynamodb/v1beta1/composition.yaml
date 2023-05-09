@@ -17,6 +17,9 @@ spec:
       base:
         apiVersion: tf.upbound.io/v1beta1
         kind: Workspace
+        metadata:
+          annotations:
+            crossplane.io/paused: "true"
         spec:
           forProvider:
             source: Remote
