@@ -17,9 +17,6 @@ spec:
       base:
         apiVersion: tf.upbound.io/v1beta1
         kind: Workspace
-        metadata:
-          annotations:
-            crossplane.io/paused: "true"
         spec:
           forProvider:
             source: Remote
@@ -44,8 +41,6 @@ spec:
       patches:
         - fromFieldPath: metadata.labels
           toFieldPath: metadata.labels
-        - fromFieldPath: metadata.annotations
-          toFieldPath: metadata.annotations
         - fromFieldPath: spec.name
           toFieldPath: spec.forProvider.vars[0].value
         - fromFieldPath: spec.hash_key
