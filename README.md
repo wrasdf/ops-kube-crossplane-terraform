@@ -2,7 +2,7 @@
 
 ### Concept of crossplane with terraform provider
 
-![Concept of crossplane with terraform provider](images/concept-new.png)
+![Concept of crossplane with terraform provider](images/concept-v2.png)
 
 ### Investigate Scenarios
 
